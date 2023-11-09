@@ -17,8 +17,8 @@ jobs:
       - name: Build With Gradle
         run: |
           chmod +x gradlew
-         ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
-- name: Prepare App
+          ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
+      - name: Prepare App
         run: |
           mkdir -p ${{ github.workspace }}/apk/
           for file in `find ~ -name "*.apk" -print`; do
@@ -27,5 +27,5 @@ jobs:
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: apk/*
+          name: ${{ github.workspace }}/apk/*
           path: ${{ github.workspace }}/apk/*
